@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\Main\IndexAdminController;
+use App\Http\Controllers\Main\IndexController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +14,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['namespase'=>'Main'],function(){
+    Route::get('/',[IndexController::class, 'index']);
 });
+
+Route::group(['namespase'=>'Admin','prefix'=>'admin'],function(){
+    Route::group(['namespase'=>'Main'],function(){
+        Route::get('/',[IndexAdminController::class, 'index']);
+    });
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
