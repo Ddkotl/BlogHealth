@@ -1,4 +1,4 @@
-@extends('admin.layouts.main')
+@extends('admin.layouts.dashbordAdmin')
 @section('content')
 
 <div class="content-wrapper">
@@ -91,7 +91,7 @@
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-  </div>
+</div>
 
 
 @endsection
