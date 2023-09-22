@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Категории</h1>
+            <h1 class="m-0">Посты</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 mb-3">
-            <a href="{{ route('admin.category.create')}}" class="btn btn-block btn-primary">Добавить новую категорию</a>
+            <a href="{{ route('admin.post.create')}}" class="btn btn-block btn-primary">Добавить новый пост</a>
           </div>
         </div>
         <div class="row">
@@ -37,6 +37,9 @@
                       <tr>
                         <th>ID</th>
                         <th>Название</th>
+                        <th>Контент</th>
+                        <th>Категории</th>
+                        <th>Тэги</th>
                         <th>Дата создания</th>
                         <th>Дата обновления</th>
                         <th>Просмотр</th>
@@ -45,25 +48,28 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($categories as $category)
+                      @foreach ($posts as $post)
                       <tr>
-                        <td>{{$category->id}}</td>
-                        <td>{{$category->title}}</td>
-                        <td>{{$category->created_at}}</td>
-                        <td>{{$category->updated_at}}</td>
+                        <td>{{$post->id}}</td>
+                        <td>{{$post->title}}</td>
+                        <td>{{$post->content}}</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{$post->created_at}}</td>
+                        <td>{{$post->updated_at}}</td>
                         <td>
                           <div >
-                            <a href="{{route('admin.category.show',$category->id)}}" class="btn btn-block btn-info">Просмотреть</i></a>
+                            <a href="{{route('admin.post.show',$post->id)}}" class="btn btn-block btn-info">Просмотреть</i></a>
                           </div>
                         </td>
                         <td>
                           <div >
-                            <a href="{{ route('admin.category.edit',$category->id)}}" class="btn btn-block btn-warning">Изменить</a>
+                            <a href="{{ route('admin.post.edit',$post->id)}}" class="btn btn-block btn-warning">Изменить</a>
                           </div>
                         </td>
                         <td>
                           <div >
-                            <form action="{{route('admin.category.delete',$category->id)}}" method="POST">
+                            <form action="{{route('admin.post.delete',$post->id)}}" method="POST">
                               @csrf
                               @method('DELETE')
                               <button type="submit" class="btn btn-block btn-danger">

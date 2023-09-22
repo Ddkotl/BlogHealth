@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Категория: {{$category->title}}</h1>
+            <h1 class="m-0">Пост: {{$post->title}}</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -31,27 +31,39 @@
                     <tbody>
                       <tr>
                         <td>ID</td>
-                        <td>{{$category->id}}</td>
+                        <td>{{$post->id}}</td>
                       </tr>
                       <tr>
                         <td>Название</td>
-                        <td>{{$category->title}}</td>
+                        <td>{{$post->title}}</td>
                       </tr>  
                       <tr>
+                        <td>Контент</td>
+                        <td>{{$post->content}}</td>
+                      </tr> 
+                      <tr>
+                        <td>Категория</td>
+                        <td></td>
+                      </tr> 
+                      <tr>
+                        <td>Тэги</td>
+                        <td></td>
+                      </tr> 
+                      <tr>
                         <td>Дата создания</td>
-                        <td>{{$category->created_at}}</td>
+                        <td>{{$post->created_at}}</td>
                       </tr>
                       <tr>
                         <td>Дата обновления</td>
-                        <td>{{$category->updated_at}}</td>
+                        <td>{{$post->updated_at}}</td>
                       </tr>                      
                     </tbody>
                   </table>
                   <div class="col-12 mb-3 mt-3">
-                    <a href="{{ route('admin.category.edit',$category)}}" class="btn btn-block btn-warning">Изменить</a>
+                    <a href="{{ route('admin.post.edit',$post)}}" class="btn btn-block btn-warning">Изменить</a>
                   </div>
                   <div class="col-12 mb-3">
-                    <form action="{{route('admin.category.delete',$category->id)}}" method="POST">
+                    <form action="{{route('admin.post.delete',$post->id)}}" method="POST">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-block btn-danger">

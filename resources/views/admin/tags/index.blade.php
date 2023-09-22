@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Категории</h1>
+            <h1 class="m-0">Тэги</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -25,7 +25,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 mb-3">
-            <a href="{{ route('admin.category.create')}}" class="btn btn-block btn-primary">Добавить новую категорию</a>
+            <a href="{{ route('admin.tag.create')}}" class="btn btn-block btn-primary">Добавить новую категорию</a>
           </div>
         </div>
         <div class="row">
@@ -45,25 +45,25 @@
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($categories as $category)
+                      @foreach ($tags as $tag)
                       <tr>
-                        <td>{{$category->id}}</td>
-                        <td>{{$category->title}}</td>
-                        <td>{{$category->created_at}}</td>
-                        <td>{{$category->updated_at}}</td>
+                        <td>{{$tag->id}}</td>
+                        <td>{{$tag->title}}</td>
+                        <td>{{$tag->created_at}}</td>
+                        <td>{{$tag->updated_at}}</td>
                         <td>
                           <div >
-                            <a href="{{route('admin.category.show',$category->id)}}" class="btn btn-block btn-info">Просмотреть</i></a>
+                            <a href="{{route('admin.tag.show',$tag->id)}}" class="btn btn-block btn-info">Просмотреть</i></a>
                           </div>
                         </td>
                         <td>
                           <div >
-                            <a href="{{ route('admin.category.edit',$category->id)}}" class="btn btn-block btn-warning">Изменить</a>
+                            <a href="{{ route('admin.tag.edit',$tag->id)}}" class="btn btn-block btn-warning">Изменить</a>
                           </div>
                         </td>
                         <td>
                           <div >
-                            <form action="{{route('admin.category.delete',$category->id)}}" method="POST">
+                            <form action="{{route('admin.tag.delete',$tag->id)}}" method="POST">
                               @csrf
                               @method('DELETE')
                               <button type="submit" class="btn btn-block btn-danger">

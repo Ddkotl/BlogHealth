@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Категория: {{$category->title}}</h1>
+            <h1 class="m-0">Тэг: {{$tag->title}}</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -31,27 +31,27 @@
                     <tbody>
                       <tr>
                         <td>ID</td>
-                        <td>{{$category->id}}</td>
+                        <td>{{$tag->id}}</td>
                       </tr>
                       <tr>
                         <td>Название</td>
-                        <td>{{$category->title}}</td>
+                        <td>{{$tag->title}}</td>
                       </tr>  
                       <tr>
                         <td>Дата создания</td>
-                        <td>{{$category->created_at}}</td>
+                        <td>{{$tag->created_at}}</td>
                       </tr>
                       <tr>
                         <td>Дата обновления</td>
-                        <td>{{$category->updated_at}}</td>
+                        <td>{{$tag->updated_at}}</td>
                       </tr>                      
                     </tbody>
                   </table>
                   <div class="col-12 mb-3 mt-3">
-                    <a href="{{ route('admin.category.edit',$category)}}" class="btn btn-block btn-warning">Изменить</a>
+                    <a href="{{ route('admin.tag.edit',$tag)}}" class="btn btn-block btn-warning">Изменить</a>
                   </div>
                   <div class="col-12 mb-3">
-                    <form action="{{route('admin.category.delete',$category->id)}}" method="POST">
+                    <form action="{{route('admin.tag.delete',$tag->id)}}" method="POST">
                       @csrf
                       @method('DELETE')
                       <button type="submit" class="btn btn-block btn-danger">
