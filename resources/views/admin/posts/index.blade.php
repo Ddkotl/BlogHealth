@@ -53,7 +53,7 @@
                         <td>{{$post->id}}</td>
                         <td>{{$post->title}}</td>
                         <td>{{$post->content}}</td>
-                        <td></td>
+                        <td>{{$post->category_id}}</td>
                         <td></td>
                         <td>{{$post->created_at}}</td>
                         <td>{{$post->updated_at}}</td>

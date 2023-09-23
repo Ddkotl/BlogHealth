@@ -26,21 +26,65 @@
         <!-- Small boxes (Stat box) -->
         <div class="row">
         
-          <form class="col-12" action="{{ route('admin.post.store')}}" method="POST">
+          <form class="col-12" action="{{ route('admin.post.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-              <input type="text" name="title" class="form-control" placeholder="Введите название поста">
+              <input type="text" name="title" class="form-control" placeholder="Введите название поста" value="{{old('title')}}">
               @error('title')
                 <div class="text-danger">
                   Это поле обязательно для заполнения
                 </div>
               @enderror
-              <input type="text" name="content" class="form-control" placeholder="Введите содержание статьи">
+            </div>
+            <div class="form-group">
+              <textarea name="content" id="summernote" >{{old('content')}}</textarea>
               @error('content')
-                <div class="text-danger">
-                  Это поле обязательно для заполнения
-                </div>
+              <div class="text-danger">
+                Это поле обязательно для заполнения
+              </div>
               @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Добавить главное изображение</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="main_image">
+                  <label class="custom-file-label">Выбрать файл</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">Загрузка</span>
+                </div>
+              </div>
+              @error('main_image')
+              <div class="text-danger">
+                Это поле обязательно для заполнения
+              </div>
+              @enderror
+            </div>
+            <div class="form-group">
+              <label for="exampleInputFile">Добавить превью</label>
+              <div class="input-group">
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="preview_image">
+                  <label class="custom-file-label">Выбрать файл</label>
+                </div>
+                <div class="input-group-append">
+                  <span class="input-group-text">Загрузка</span>
+                </div>
+              </div>
+              @error('preview_image')
+              <div class="text-danger">
+                Это поле обязательно для заполнения
+              </div>
+              @enderror
+            </div>
+            <div class="form-group">
+              <label>Выберете категорию</label>
+              <select name="category_id" class="form-control">
+                @foreach ($categories as $category)
+                  <option value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->title}}</option>
+                @endforeach
+              </select>
             </div>
             <button type="submit" class="btn btn-block btn-success">Добавить</button>
           </form>
