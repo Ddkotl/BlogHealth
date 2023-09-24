@@ -25,7 +25,7 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-12 mb-3">
-            <a href="{{ route('admin.tag.create')}}" class="btn btn-block btn-primary">Добавить новую категорию</a>
+            <a href="{{ route('admin.tag.create')}}" class="btn btn-block btn-primary">Добавить новуый тэг</a>
           </div>
         </div>
         <div class="row">
