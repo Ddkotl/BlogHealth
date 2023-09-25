@@ -24,6 +24,14 @@ use App\Http\Controllers\Admin\Post\EditController as PostEditController;
 use App\Http\Controllers\Admin\Post\UpdateController as PostUpdateController;
 use App\Http\Controllers\Admin\Post\DeleteController as PostDeleteController;
 
+use App\Http\Controllers\Admin\User\IndexController as UserIndexController;
+use App\Http\Controllers\Admin\User\CreateController as UserCreateController;
+use App\Http\Controllers\Admin\User\StoreController as UserStoreController;
+use App\Http\Controllers\Admin\User\ShowController as UserShowController;
+use App\Http\Controllers\Admin\User\EditController as UserEditController;
+use App\Http\Controllers\Admin\User\UpdateController as UserUpdateController;
+use App\Http\Controllers\Admin\User\DeleteController as UserDeleteController;
+
 use App\Http\Controllers\Admin\Main\IndexController as MainIndexController;
 
 use App\Http\Controllers\Main\IndexController;
@@ -43,11 +51,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::group(['namespace'=>'Controllers\Main'],function(){
+Route::group(['namespace'=>'Main'],function(){
     Route::get('/',[IndexController::class, 'index']);
 });
 
-Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
+Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','admin']],function(){
     Route::group(['namespase'=>'Main'],function(){
         Route::get('/',[MainIndexController::class,'index']);
     });
@@ -78,8 +86,17 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin'],function(){
         Route::patch('/{post}',[PostUpdateController::class,'index'])->name('admin.post.update');
         Route::delete('/{post}',[PostDeleteController::class,'index'])->name('admin.post.delete');
     });
+    Route::group(['namespace'=>'User','prefix'=>'users'],function(){
+        Route::get('/',[UserIndexController::class,'index'])->name('admin.user.index');
+        Route::get('/create',[UserCreateController::class,'index'])->name('admin.user.create');
+        Route::post('/',[UserStoreController::class,'index'])->name('admin.user.store');
+        Route::get('/{user}',[UserShowController::class,'index'])->name('admin.user.show');
+        Route::get('/{user}/edit',[UserEditController::class,'index'])->name('admin.user.edit');
+        Route::patch('/{user}',[UserUpdateController::class,'index'])->name('admin.user.update');
+        Route::delete('/{user}',[UserDeleteController::class,'index'])->name('admin.user.delete');
+    });
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

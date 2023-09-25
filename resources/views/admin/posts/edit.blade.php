@@ -33,7 +33,7 @@
               <input type="text" name="title" class="form-control" placeholder="Введите название поста" value="{{$post->title}}">
               @error('title')
                 <div class="text-danger">
-                  Это поле обязательно для заполнения
+                  {{$message}}
                 </div>
               @enderror
             </div>
@@ -41,7 +41,7 @@
               <textarea name="content" id="summernote" >{{$post->content}}</textarea>
               @error('content')
               <div class="text-danger">
-                Это поле обязательно для заполнения
+                {{$message}}
               </div>
               @enderror
             </div>
@@ -61,7 +61,7 @@
               </div>
               @error('main_image')
               <div class="text-danger">
-                Это поле обязательно для заполнения
+                {{$message}}
               </div>
               @enderror
             </div>
@@ -81,7 +81,7 @@
               </div>
               @error('preview_image')
               <div class="text-danger">
-                Это поле обязательно для заполнения
+                {{$message}}
               </div>
               @enderror
             </div>
@@ -92,6 +92,11 @@
                   <option value="{{$category->id}}" {{$category->id == $post->category_id ? 'selected' : ''}}>{{$category->title}}</option>
                 @endforeach
               </select>
+              @error('category_id')
+              <div class="text-danger">
+                {{$message}}
+              </div>
+              @enderror
             </div>
             <div class="form-group w-50">
               <label>Выберите тэги</label>
@@ -100,6 +105,11 @@
                   <option {{is_array($post->tags->pluck('id')->toArray()) && in_array($tag->id,$post->tags->pluck('id')->toArray()) ? ' selected' : ''}} value="{{$tag->id}}">{{$tag->title}}</option>                  
                 @endforeach
               </select>
+              @error('tag_ids')
+              <div class="text-danger">
+                {{$message}}
+              </div>
+              @enderror
             </div>
             <button type="submit" class="btn btn-block btn-success">Сохранить</button>
           </form>

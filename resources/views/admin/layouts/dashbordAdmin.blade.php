@@ -30,7 +30,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light d-flex justify-content-between ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -38,10 +38,13 @@
       </li>
 
     </ul>
-
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <form action="{{route('logout')}}" method="POST">
+          @csrf
+          <input type="submit" value="Выйти" class="btn btn-outline-primary">
+        </form>
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->

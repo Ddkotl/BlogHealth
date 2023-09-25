@@ -32,7 +32,7 @@
               <input type="text" name="title" class="form-control" placeholder="Введите название поста" value="{{old('title')}}">
               @error('title')
                 <div class="text-danger">
-                  Это поле обязательно для заполнения
+                  {{$message}}
                 </div>
               @enderror
             </div>
@@ -40,7 +40,7 @@
               <textarea name="content" id="summernote" >{{old('content')}}</textarea>
               @error('content')
               <div class="text-danger">
-                Это поле обязательно для заполнения
+                {{$message}}
               </div>
               @enderror
             </div>
@@ -57,7 +57,7 @@
               </div>
               @error('main_image')
               <div class="text-danger">
-                Это поле обязательно для заполнения
+                {{$message}}
               </div>
               @enderror
             </div>
@@ -74,7 +74,7 @@
               </div>
               @error('preview_image')
               <div class="text-danger">
-                Это поле обязательно для заполнения
+                {{$message}}
               </div>
               @enderror
             </div>
@@ -85,6 +85,11 @@
                   <option value="{{$category->id}}" {{$category->id == old('category_id') ? 'selected' : ''}}>{{$category->title}}</option>
                 @endforeach
               </select>
+              @error('category_id')
+              <div class="text-danger">
+                {{$message}}
+              </div>
+              @enderror
             </div>
             <div class="form-group">
               <label>Выберите тэги</label>
@@ -93,6 +98,11 @@
                   <option {{is_array(old('tag_ids')) && in_array($tag->id,old('tag_ids')) ? ' selected' : ''}} value="{{$tag->id}}">{{$tag->title}}</option>                  
                 @endforeach
               </select>
+              @error('tag_ids')
+              <div class="text-danger">
+                {{$message}}
+              </div>
+              @enderror
             </div>
             <button type="submit" class="btn btn-block btn-success">Добавить</button>
           </form>
