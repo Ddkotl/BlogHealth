@@ -35,7 +35,7 @@ use App\Http\Controllers\Admin\User\DeleteController as UserDeleteController;
 use App\Http\Controllers\Admin\Main\IndexController as MainIndexController;
 
 use App\Http\Controllers\Main\IndexController;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,7 +55,7 @@ Route::group(['namespace'=>'Main'],function(){
     Route::get('/',[IndexController::class, 'index']);
 });
 
-Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','admin']],function(){
+Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','admin','verified']],function(){
     Route::group(['namespase'=>'Main'],function(){
         Route::get('/',[MainIndexController::class,'index']);
     });
@@ -97,6 +97,6 @@ Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','admi
     });
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
