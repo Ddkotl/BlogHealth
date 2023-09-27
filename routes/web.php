@@ -34,6 +34,25 @@ use App\Http\Controllers\Admin\User\DeleteController as UserDeleteController;
 
 use App\Http\Controllers\Admin\Main\IndexController as MainIndexController;
 
+
+
+
+
+
+use App\Http\Controllers\Personal\Main\IndexController as PersonalMainIndexController;
+
+use App\Http\Controllers\Personal\Like\IndexController as PersonalLikeIndexController;
+use App\Http\Controllers\Personal\Like\DeleteController as PersonalLikeDeleteController;
+
+use App\Http\Controllers\Personal\Comment\IndexController as PersonalCommentIndexController;
+use App\Http\Controllers\Personal\Comment\EditController as PersonalCommentEditController;
+use App\Http\Controllers\Personal\Comment\UpdateController as PersonalCommentUpdateController;
+use App\Http\Controllers\Personal\Comment\DeleteController as PersonalCommentDeleteController;
+
+
+
+
+
 use App\Http\Controllers\Main\IndexController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -52,12 +71,33 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['namespace'=>'Main'],function(){
-    Route::get('/',[IndexController::class, 'index']);
+    Route::get('/',[IndexController::class, 'index'])->name('main.index');
 });
+
+
+Route::group(['namespace'=>'Personal','prefix'=>'personal','middleware'=>['auth','verified']],function(){
+    Route::group(['namespase'=>'Main'],function(){
+        Route::get('/',[PersonalMainIndexController::class,'index'])->name('personal.main.index');
+    });
+    Route::group(['namespace'=>'Category','prefix'=>'likes'],function(){
+        Route::get('/',[PersonalLikeIndexController::class,'index'])->name('personal.like.index');
+        Route::delete('/{post}',[PersonalLikeDeleteController::class,'index'])->name('personal.like.delete');
+
+
+    });
+    Route::group(['namespace'=>'Tag','prefix'=>'comments'],function(){
+        Route::get('/',[PersonalCommentIndexController::class,'index'])->name('personal.comment.index');
+        Route::get('/{comment}/edit',[PersonalCommentEditController::class,'index'])->name('personal.comment.edit');
+        Route::patch('/{comment}',[PersonalCommentUpdateController::class,'index'])->name('personal.comment.update');
+        Route::delete('/{comment}',[PersonalCommentDeleteController::class,'index'])->name('personal.comment.delete');
+    });
+
+});
+
 
 Route::group(['namespace'=>'Admin','prefix'=>'admin','middleware'=>['auth','admin','verified']],function(){
     Route::group(['namespase'=>'Main'],function(){
-        Route::get('/',[MainIndexController::class,'index']);
+        Route::get('/',[MainIndexController::class,'index'])->name('admin.main.index');
     });
     Route::group(['namespace'=>'Category','prefix'=>'categories'],function(){
         Route::get('/',[CategoryIndexController::class,'index'])->name('admin.category.index');
