@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\Main\IndexController as MainIndexController;
 
 
 
+
 use App\Http\Controllers\Personal\Main\IndexController as PersonalMainIndexController;
 
 use App\Http\Controllers\Personal\Like\IndexController as PersonalLikeIndexController;
@@ -54,6 +55,12 @@ use App\Http\Controllers\Personal\Comment\DeleteController as PersonalCommentDel
 
 
 use App\Http\Controllers\Main\IndexController;
+use App\Http\Controllers\Main\BlogSingleController;
+use App\Http\Controllers\Main\Comment\IndexController as CommentIndexController;
+use App\Http\Controllers\Main\Like\IndexController as LikeIndexController;
+
+
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -72,6 +79,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['namespace'=>'Main'],function(){
     Route::get('/',[IndexController::class, 'index'])->name('main.index');
+});
+
+Route::group(['namespace'=>'Main','prefix'=>'posts'],function(){
+    Route::get('/{post}',[BlogSingleController::class, 'index'])->name('single.post');
+
+    Route::group(['namespace' => 'Comment','prefix'=>'{post}/comments'],function(){
+        Route::post('/',[CommentIndexController::class,'index'])->name('single.post.comment');
+    });
+    Route::group(['namespace' => 'Like','prefix'=>'{post}/likes'],function(){
+        Route::post('/',[LikeIndexController::class,'index'])->name('post.like');
+    });
 });
 
 

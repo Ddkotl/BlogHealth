@@ -7,6 +7,7 @@
     <title>Edica :: Home</title>
     <link rel="stylesheet" href="{{asset('assets/vendors/flag-icon-css/css/flag-icon.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendors/font-awesome/css/all.min.css')}}">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="{{asset('assets/vendors/aos/aos.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <script src="{{asset('assets/vendors/jquery/jquery.min.js')}}"></script>
@@ -43,13 +44,36 @@
                             <a class="nav-link" href="contact.html">Contact</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"><span class="flag-icon flag-icon-squared rounded-circle flag-icon-gb"></span> Eng</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Download</a>
-                        </li>
+                    <ul class="navbar-nav ms-auto">
+                        <!-- Authentication Links -->
+                        @guest
+                            @if (Route::has('login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ asset(route('login') )}}">Войти</a>
+                                </li>
+                            @endif
+
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ asset(route('register')) }}">Регистрация</a>
+                                </li>
+                            @endif
+                        @else
+                        <ul class="navbar-nav">
+                            <li class="nav-item m-2">
+                              <form action="{{asset(route('logout'))}}" method="POST">
+                                @csrf
+                                <input type="submit" value="Выйти" class="btn btn-outline-primary">
+                              </form>
+                            </li>
+                            <li class="nav-item m-2">
+                                <form action="{{asset(route('personal.main.index'))}}" method="get">
+                                  @csrf
+                                  <input type="submit" value="Личный кабинет" class="btn btn-outline-primary">
+                                </form>
+                              </li>
+                          </ul>
+                        @endguest
                     </ul>
                 </div>
             </nav>
@@ -58,7 +82,7 @@
 
 @yield('content')
 
-    <footer class="edica-footer" data-aos="fade-up">
+    <footer class="edica-footer mt-3"  >
         <div class="container">
             <div class="row footer-widget-area">
                 <div class="col-md-3">
